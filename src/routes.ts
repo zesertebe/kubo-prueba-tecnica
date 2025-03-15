@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import { ApiError, Errors } from "@/core/errors/api.error";
 import type { StatusCode } from "hono/utils/http-status";
 import { usersMoviesRoutes } from "./api/usersMovies/routes/usersMovies.routes";
+import { moviesRoutes } from "./api/movies/routes/movies.routes";
 
 /**
  * Definir rutas para retornar
@@ -25,4 +26,5 @@ export const setRoutes = (app: Hono) => {
   });
 
   app.route("/usersmovies", usersMoviesRoutes);
+  app.route("/movies", moviesRoutes);
 };

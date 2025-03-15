@@ -5,6 +5,7 @@ import type {
 
 export class UsersMoviesRepository implements UsersMoviesInterface {
   getMoviesByUser(id: number): Promise<any> {
+    console.log("repository;: ", id);
     return new Promise(() => {
       const results: UsersMoviesType[] = [
         {
@@ -18,6 +19,7 @@ export class UsersMoviesRepository implements UsersMoviesInterface {
   }
 
   getUsersByMovie(id: number): Promise<any> {
+    console.log("repository;: ", id);
     return new Promise(() => {
       const results: UsersMoviesType[] = [
         {
@@ -41,6 +43,7 @@ export class UsersMoviesRepository implements UsersMoviesInterface {
         userId,
         viewedAt,
       };
+      return result;
     });
   }
 }

@@ -4,7 +4,10 @@ import type { UsersMoviesRepository } from "@/repositories/usersMovies/usersMovi
 export class UsersMoviesService implements UsersMoviesInterface {
   constructor(private userMoviesRepository: UsersMoviesRepository) {}
   async getMoviesByUser(id: number) {
-    return await this.userMoviesRepository.getMoviesByUser(id);
+    console.log("service: ", id);
+    const response = this.userMoviesRepository.getMoviesByUser(id);
+    console.log("service response: :", response);
+    return response;
   }
 
   async getUsersByMovie(id: number) {

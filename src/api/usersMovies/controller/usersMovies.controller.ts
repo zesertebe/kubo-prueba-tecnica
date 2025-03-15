@@ -3,7 +3,11 @@ import type { UsersMoviesService } from "@/services/usersMovies/usersMovies.serv
 import type { Context } from "hono";
 
 export class UserMoviesController {
-  constructor(private usersMoviesService: UsersMoviesService) {}
+  constructor(private usersMoviesService: UsersMoviesService) {
+    this.createUserMovie = this.createUserMovie.bind(this);
+    this.getUsersByMovie = this.getUsersByMovie.bind(this);
+    this.getMoviesByUser = this.getMoviesByUser.bind(this);
+  }
 
   async getUsersByMovie(context: Context) {
     try {
@@ -30,9 +34,10 @@ export class UserMoviesController {
       if (!userId) {
         throw ApiError.errorList.INVALID_REQUEST;
       }
-      const response = await this.usersMoviesService.getMoviesByUser(
+      const response = this.usersMoviesService.getMoviesByUser(
         parseInt(userId),
       );
+      console.log("controller response : ", response);
       return context.json({
         status: true,
         content: response,
