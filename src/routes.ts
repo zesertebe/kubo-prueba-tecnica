@@ -4,6 +4,7 @@ import type { StatusCode } from "hono/utils/http-status";
 import { usersMoviesRoutes } from "./api/usersMovies/routes/usersMovies.routes";
 import { moviesRoutes } from "./api/movies/routes/movies.routes";
 import { categoriesRoutes } from "./api/categories/routes/categories.routes";
+import { usersRoutes } from "./api/users/routes/users.routes";
 
 /**
  * Definir rutas para retornar
@@ -29,4 +30,5 @@ export const setRoutes = (app: Hono) => {
   app.route("/usersmovies", usersMoviesRoutes);
   app.route("/movies", moviesRoutes);
   app.route("/categories", categoriesRoutes);
+  app.route("/users", usersRoutes);
 };
