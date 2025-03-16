@@ -48,7 +48,6 @@ export class CategoriesController {
       const response = await this.categoriesService.getCategoryById(
         parseInt(id),
       );
-      console.log("controller repsonse: ", response);
       if (!response) {
         const e = ApiError.errorList.NOT_FOUND;
         e.message =

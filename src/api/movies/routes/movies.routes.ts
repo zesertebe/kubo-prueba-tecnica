@@ -12,3 +12,4 @@ const moviesController = new MoviesController(moviesService);
 moviesRoutes.get("/:id", moviesController.getMovieById);
 moviesRoutes.post("/", moviesController.createMovie);
 moviesRoutes.get("/", moviesController.getMovies);
+moviesRoutes.get("/news/", moviesController.getNewMovies);

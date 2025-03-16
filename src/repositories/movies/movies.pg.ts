@@ -27,6 +27,15 @@ export class MoviesPGRepository implements MoviesInterfaceDB {
     };
     return result;
   }
+  getNewMovies(limit: number, page: number): QueryType {
+    const offset = (page - 1) * limit;
+    const result: QueryType = {
+      query:
+        "SELECT * FROM core.movies  WHERE core.movies.movie_release_date >= NOW() - INTERVAL '3 weeks' LIMIT $1 OFFSET $2",
+      params: [limit, offset],
+    };
+    return result;
+  }
 
   getMovieById(id: MoviesType["id"]): QueryType {
     const result = {

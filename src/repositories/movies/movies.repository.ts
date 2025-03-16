@@ -52,4 +52,17 @@ export class MoviesRepository implements MoviesInterface {
     );
     return movies;
   }
+
+  async getNewMovies(
+    limit: number,
+    page: number,
+    order: OrderRelease,
+  ): Promise<MoviesType[]> {
+    const result = this.db.getNewMovies(limit, page, order);
+    const movies: MoviesType[] = await this.factoryDB.query(
+      result.query,
+      result.params,
+    );
+    return movies;
+  }
 }

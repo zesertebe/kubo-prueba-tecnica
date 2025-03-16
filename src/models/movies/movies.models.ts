@@ -24,6 +24,11 @@ export interface MoviesInterface {
     page: number,
     order: OrderRelease,
   ): Promise<MoviesType[]>;
+  getNewMovies(
+    limit: number,
+    page: number,
+    order: OrderRelease,
+  ): Promise<MoviesType[]>;
 }
 
 export interface MoviesInterfaceDB {
@@ -36,4 +41,5 @@ export interface MoviesInterfaceDB {
 
   getMovieById(id: MoviesType["id"]): QueryType;
   getMovies(limit: number, page: number, order: OrderRelease): QueryType;
+  getNewMovies(limit: number, page: number, order: OrderRelease): QueryType;
 }

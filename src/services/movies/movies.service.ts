@@ -23,11 +23,20 @@ export class MoviesService implements MoviesInterface {
   async getMovieById(id: MoviesType["id"]): Promise<MoviesType> {
     return this.moviesRepository.getMovieById(id);
   }
+
   async getMovies(
     limit: number,
     page: number,
     order: OrderRelease,
   ): Promise<MoviesType[]> {
     return this.moviesRepository.getMovies(limit, page, order);
+  }
+
+  async getNewMovies(
+    limit: number,
+    page: number,
+    order: OrderRelease,
+  ): Promise<MoviesType[]> {
+    return this.moviesRepository.getNewMovies(limit, page, order);
   }
 }
