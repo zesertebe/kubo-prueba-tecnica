@@ -39,6 +39,8 @@ create TABLE if not exists Core.movies(
 create TABLE if not exists Core.users_movies(
   user_id INT,
   movie_id INT,
+  FOREIGN KEY (user_id) REFERENCES Core.users(user_id) ON DELETE CASCADE,
+  FOREIGN KEY (movie_id) REFERENCES Core.movies(movie_id) ON DELETE CASCADE,
   viewd_at TIMESTAMP,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
