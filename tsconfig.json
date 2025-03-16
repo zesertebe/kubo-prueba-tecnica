@@ -2,15 +2,15 @@
   "compilerOptions": {
     "experimentalDecorators": true,
     "target": "ESNext",
-    "outDir": "./dist",
-    "module": "CommonJS",
+    "module": "NodeNext",
     "strict": true,
-    "moduleResolution": "node",
+    "moduleResolution": "nodenext",
     "verbatimModuleSyntax": false,
     "skipLibCheck": true,
     "types": ["node"],
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx",
+    "outDir": "./dist",
     "paths": {
       "@/*": ["./src/*"]
     }

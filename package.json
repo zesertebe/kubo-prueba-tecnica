@@ -1,10 +1,9 @@
 {
   "name": "kubo-prueba-tecnica",
-  "type": "module",
   "main": "src/index.ts",
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "build": "tsc",
+    "build": "tsc && tsc-alias",
     "start": "node dist/index.js"
   },
   "dependencies": {
@@ -21,6 +20,7 @@
     "@types/pg": "^8.11.11",
     "jest": "^29.7.0",
     "ts-jest": "^29.2.6",
+    "tsc-alias": "^1.8.11",
     "tsx": "^4.7.1"
   }
 }

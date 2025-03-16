@@ -6,7 +6,7 @@ import { ApiError } from "../errors/api.error";
 const { Pool } = pg;
 
 export class PoolPG implements DatabaseInterface {
-  private pool: typeof Pool;
+  private pool;
 
   constructor() {
     this.pool = new Pool({
