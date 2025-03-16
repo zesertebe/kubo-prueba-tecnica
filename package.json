@@ -9,7 +9,10 @@
   "dependencies": {
     "@hono/node-server": "^1.13.8",
     "@hono/zod-validator": "^0.2.1",
-    "hono": "^4.7.4"
+    "dotenv": "^16.4.7",
+    "hono": "^4.7.4",
+    "pg": "^8.14.0",
+    "pg-pool": "^3.8.0"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",

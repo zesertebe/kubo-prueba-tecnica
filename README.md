@@ -14,7 +14,13 @@ git clone https://github.com/zesertebe/kubo-prueba-tecnica.git
 npm install
 ```
 
-3. Crear el archivo de variables de entorno (.env) en la raiz del proyecto con la siguiente estructura:
+3. Ejecutar el archivo "schema.sql" con un usuario con suficientes permisos:
+
+```bash
+sudo -u postgres psql -d kudo -f db/schema.sql
+```
+
+4. Crear el archivo de variables de entorno (.env) en la raiz del proyecto con la siguiente estructura:
 
 ```env
   BASE: la versión base de la api ej: v1,

@@ -4,11 +4,11 @@ import { STORE } from "@/core/store/store";
 import { setRoutes } from "./routes";
 
 const base = STORE.BASE && STORE.BASE !== "" ? STORE.BASE : "v1"; // api version
-const port = (process.env.APP_PORT || 3000) as number;
+const port = (STORE.APP_PORT || 3000) as number;
 
 const app = new Hono().basePath("/" + base);
 
-setRoutes(app); // set the routes
+setRoutes(app);
 
 app.get("/test", (c) => {
   return c.json({

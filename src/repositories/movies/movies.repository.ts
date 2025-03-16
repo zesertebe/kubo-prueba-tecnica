@@ -1,35 +1,42 @@
+import { DBFactory } from "@/core/db/factory";
+import { STORE } from "@/core/store/store";
 import type {
   MoviesInterface,
+  MoviesInterfaceDB,
   MoviesType,
   OrderRelease,
 } from "@/models/movies/movies.models";
+import { MoviesPGRepository } from "./movies.pg";
 
 export class MoviesRepository implements MoviesInterface {
+  private db: MoviesInterfaceDB;
+  private factoryDB;
+  constructor() {
+    this.factoryDB = DBFactory.createRepository();
+    this.db =
+      STORE.DB == 0 ? new MoviesPGRepository() : new MoviesPGRepository();
+  }
   async createMovie({
     title,
     category,
     releaseDate,
     length,
   }: Omit<MoviesType, "id">): Promise<MoviesType> {
-    const movie: MoviesType = {
-      id: 1,
+    const result = this.db.createMovie({
+      title,
       category,
       length,
       releaseDate,
-      title,
-    };
-    console.log("service movie: ", movie);
+    });
+    const movie: MoviesType = (
+      await this.factoryDB.query(result.query, result.params)
+    )[0];
     return movie;
   }
 
   async getMovieById(id: MoviesType["id"]): Promise<MoviesType> {
-    const movie: MoviesType = {
-      id,
-      category: 1,
-      length: "27:30",
-      releaseDate: "",
-      title: "movie",
-    };
+    const result = this.db.getMovieById(id);
+    const movie = (await this.factoryDB.query(result.query, result.params))[0];
     return movie;
   }
 
@@ -38,14 +45,11 @@ export class MoviesRepository implements MoviesInterface {
     page: number,
     order: OrderRelease,
   ): Promise<MoviesType[]> {
-    return [
-      {
-        category: 1,
-        id: 1,
-        length: "27:30",
-        releaseDate: "",
-        title: "",
-      },
-    ];
+    const result = this.db.getMovies(limit, page, order);
+    const movies: MoviesType[] = await this.factoryDB.query(
+      result.query,
+      result.params,
+    );
+    return movies;
   }
 }

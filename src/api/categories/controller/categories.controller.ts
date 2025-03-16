@@ -48,6 +48,13 @@ export class CategoriesController {
       const response = await this.categoriesService.getCategoryById(
         parseInt(id),
       );
+      console.log("controller repsonse: ", response);
+      if (!response) {
+        const e = ApiError.errorList.NOT_FOUND;
+        e.message =
+          "No se ha encontrado ninguna categoría con el id especificado";
+        throw e;
+      }
       return context.json({
         status: true,
         content: response,

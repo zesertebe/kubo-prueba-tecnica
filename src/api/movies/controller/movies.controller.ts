@@ -17,13 +17,11 @@ export class MoviesController {
       if (!body) {
         throw ApiError.errorList.INVALID_REQUEST;
       }
-      console.log("body:", body);
       let movie: Omit<MoviesType, "id">;
       const isValidRequest = Utils.hasProperties(
         ["category", "length", "releaseDate", "title"],
         body,
       );
-      console.log("isValidRequest: ", isValidRequest);
       if (!isValidRequest.verify) {
         const e = ApiError.errorList.INVALID_REQUEST;
         e.message = `Hacen falta las siguientes propiedades de 'movie': [${isValidRequest.properties}]`;
@@ -35,8 +33,12 @@ export class MoviesController {
         releaseDate: body.releaseDate,
         title: body.title,
       };
+      if (!Utils.isValidDate(movie.releaseDate)) {
+        const e = ApiError.errorList.INVALID_REQUEST;
+        e.message = `La fecha es incorrecta, utilice el formato(YYYY-MM-DD)`;
+        throw e;
+      }
 
-      console.log("movie: ", movie);
       const response = await this.moviesService.createMovie(movie);
       return context.json({
         status: true,
@@ -55,6 +57,13 @@ export class MoviesController {
         throw ApiError.errorList.INVALID_REQUEST;
       }
       const response = await this.moviesService.getMovieById(parseInt(id));
+
+      if (!response) {
+        const e = ApiError.errorList.NOT_FOUND;
+        e.message =
+          "No se ha encontrado ninguna pelicula con el id especificado";
+        throw e;
+      }
       return context.json({
         status: true,
         content: response,

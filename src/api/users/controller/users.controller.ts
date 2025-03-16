@@ -49,7 +49,13 @@ export class UsersController {
       if (!id) {
         throw ApiError.errorList.INVALID_REQUEST;
       }
-      const response = this.usersService.getUserByiId(parseInt(id));
+      const response = await this.usersService.getUserById(parseInt(id));
+
+      if (!response) {
+        const e = ApiError.errorList.NOT_FOUND;
+        e.message = "No se ha encontrado ningun usuario con el id especificado";
+        throw e;
+      }
       return context.json({
         status: true,
         content: response,

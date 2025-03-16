@@ -22,6 +22,10 @@ create TABLE if not exists Core.categories(
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+INSERT into Core.categories(category_name) VALUES ('Terror');
+INSERT into Core.categories(category_name) VALUES ('Suspenso');
+INSERT into Core.categories(category_name) VALUES ('Drama');
+INSERT into Core.categories(category_name) VALUES ('Comedia');
 
 -- movies
 create TABLE if not exists Core.movies(
@@ -47,4 +51,9 @@ create TABLE if not exists Core.users_movies(
 
 );
 GRANT ALL ON SCHEMA core TO "owner";
+ALTER DEFAULT PRIVILEGES IN SCHEMA core GRANT ALL ON TABLES TO "owner";
+GRANT ALL ON TABLE core.categories TO "owner";
+GRANT ALL ON TABLE core.movies TO "owner";
+GRANT ALL ON TABLE core.users TO "owner";
+GRANT ALL ON TABLE core.users_movies TO "owner";
 

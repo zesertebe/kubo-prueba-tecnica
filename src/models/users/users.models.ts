@@ -1,3 +1,5 @@
+import type { QueryType } from "@/core/types/types";
+
 export type UserType = {
   id: number;
   name: string;
@@ -6,10 +8,17 @@ export type UserType = {
 };
 
 export interface UsersInterface {
-  getUserByiId(id: UserType["id"]): Promise<UserType>;
+  getUserById(id: UserType["id"]): Promise<UserType>;
   getUsers(limit: number, page: number): Promise<UserType[]>;
   createUser({
     email,
     name,
-  }: Omit<UserType, "id" | "isVerified">): Promise<UserType>;
+    isVerified,
+  }: Omit<UserType, "id">): Promise<UserType>;
+}
+
+export interface UsersInterfaceDB {
+  getUserById(id: UserType["id"]): QueryType;
+  getUsers(limit: number, page: number): QueryType;
+  createUser({ email, name, isVerified }: Omit<UserType, "id">): QueryType;
 }

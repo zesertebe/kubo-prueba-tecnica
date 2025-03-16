@@ -8,6 +8,7 @@ export const categoriesRoutes = new Hono();
 const categoriesRepository = new CategoriesRepository();
 const categoriesService = new CategoriesService(categoriesRepository);
 const categoriesController = new CategoriesController(categoriesService);
+
 categoriesRoutes.get("/:id", categoriesController.getCategoryById);
 categoriesRoutes.post("/", categoriesController.createCategory);
 categoriesRoutes.get("/", categoriesController.getCategories);
