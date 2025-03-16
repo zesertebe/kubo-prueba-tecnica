@@ -5,7 +5,7 @@ import { ApiError } from "../errors/api.error";
 const { Pool } = pg;
 
 export class PoolPG implements DatabaseInterface {
-  private pool: Pool;
+  private pool: typeof Pool;
 
   constructor() {
     this.pool = new Pool({
@@ -25,7 +25,7 @@ export class PoolPG implements DatabaseInterface {
     try {
       const result = await client.query(text, params);
       return result.rows;
-    } catch (error) {
+    } catch (error: any) {
       console.log("fallo: ", error);
       if (error.code == 23505) {
         const e = ApiError.errorList.ALREADY_EXISTS;
