@@ -2,7 +2,7 @@ import "dotenv/config";
 
 export const STORE = {
   BASE: process.env.BASE || "v1",
-  APP_PORT: process.env.APP_PORT || 3000,
+  APP_PORT: process.env.PORT || 3000,
   DB: process.env.DB || 0,
   PG: {
     USER: process.env.PG_USER || "",
