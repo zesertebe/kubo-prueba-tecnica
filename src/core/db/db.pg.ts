@@ -9,16 +9,29 @@ export class PoolPG implements DatabaseInterface {
   private pool;
 
   constructor() {
-    this.pool = new Pool({
-      user: STORE.PG.USER,
-      password: STORE.PG.PASSWORD,
-      host: STORE.PG.HOST,
-      database: STORE.PG.NAME,
-      port: parseInt(STORE.PG.PORT),
-      max: 20,
-      idleTimeoutMillis: 30000,
-      connectionTimeoutMillis: 2000,
-    });
+    let objPool = {};
+    if (STORE.ENV == 0) {
+      // estamos en local
+      objPool = {
+        user: STORE.PG.USER,
+        password: STORE.PG.PASSWORD,
+        host: STORE.PG.HOST,
+        database: STORE.PG.NAME,
+        port: parseInt(STORE.PG.PORT),
+        max: 20,
+        idleTimeoutMillis: 30000,
+        connectionTimeoutMillis: 2000,
+      };
+    } else {
+      // estamos en heroku
+      objPool = {
+        connectionString: STORE.PG.HOST,
+        ssl: {
+          rejectUnauthorized: false,
+        },
+      };
+    }
+    this.pool = new Pool(objPool);
   }
 
   async query(text: string, params?: any[]): Promise<any> {
