@@ -1,49 +1,52 @@
+import { DBFactory } from "@/core/db/factory";
+import { STORE } from "@/core/store/store";
 import type {
   UsersMoviesInterface,
+  UsersMoviesInterfaceDB,
   UsersMoviesType,
 } from "@/models/usersMovies/userMovies.models";
+import { UsersMoviesPGRepository } from "./usersMovies.pg";
+import type { QueryType } from "@/core/types/types";
 
 export class UsersMoviesRepository implements UsersMoviesInterface {
-  getMoviesByUser(id: number): Promise<any> {
-    console.log("repository;: ", id);
-    return new Promise(() => {
-      const results: UsersMoviesType[] = [
-        {
-          movieId: 1,
-          userId: 1,
-          viewedAt: "2024-05-25",
-        },
-      ];
-      return results;
-    });
+  private db: UsersMoviesInterfaceDB;
+  private factoryDB;
+  constructor() {
+    this.factoryDB = DBFactory.createRepository();
+    this.db =
+      STORE.DB == 0
+        ? new UsersMoviesPGRepository()
+        : new UsersMoviesPGRepository();
   }
 
-  getUsersByMovie(id: number): Promise<any> {
-    console.log("repository;: ", id);
-    return new Promise(() => {
-      const results: UsersMoviesType[] = [
-        {
-          movieId: 2,
-          userId: 2,
-          viewedAt: "2024-05-25",
-        },
-      ];
-      return results;
-    });
+  async getMoviesByUser(id: number): Promise<UsersMoviesType[]> {
+    const query = this.db.getMoviesByUser(id);
+    const results: UsersMoviesType[] = await this.factoryDB.query(
+      query.query,
+      query.params,
+    );
+    return results;
   }
 
-  createUserMovie(
+  async getUsersByMovie(id: number): Promise<UsersMoviesType[]> {
+    const query: QueryType = this.db.getUsersByMovie(id);
+    const results: UsersMoviesType[] = await this.factoryDB.query(
+      query.query,
+      query.params,
+    );
+    return results;
+  }
+
+  async createUserMovie(
     userId: number,
     movieId: number,
     viewedAt: string,
-  ): Promise<any> {
-    return new Promise(() => {
-      const result: UsersMoviesType = {
-        movieId,
-        userId,
-        viewedAt,
-      };
-      return result;
-    });
+  ): Promise<UsersMoviesType> {
+    const query = this.db.createUserMovie(userId, movieId, viewedAt);
+    const result: UsersMoviesType = await this.factoryDB.query(
+      query.query,
+      query.params,
+    );
+    return result;
   }
 }

@@ -1,4 +1,5 @@
 import { ApiError } from "@/core/errors/api.error";
+import { Utils } from "@/core/utils/utils";
 import type { UsersMoviesService } from "@/services/usersMovies/usersMovies.service";
 import type { Context } from "hono";
 
@@ -34,7 +35,8 @@ export class UserMoviesController {
       if (!userId) {
         throw ApiError.errorList.INVALID_REQUEST;
       }
-      const response = this.usersMoviesService.getMoviesByUser(
+
+      const response = await this.usersMoviesService.getMoviesByUser(
         parseInt(userId),
       );
       console.log("controller response : ", response);
@@ -53,6 +55,13 @@ export class UserMoviesController {
       const body = await context.req.json();
       if (!body) {
         throw ApiError.errorList.INVALID_REQUEST;
+      }
+
+      const isValidRequest = Utils.hasProperties(["userId", "movieId"], body);
+      if (!isValidRequest.verify) {
+        const e = ApiError.errorList.INVALID_REQUEST;
+        e.message = `Hacen falta las siguientes propiedades: [${isValidRequest.properties}]`;
+        throw e;
       }
       const userMovie = {
         userId: body.userId,
