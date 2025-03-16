@@ -1,3 +1,4 @@
+// @ts-ignore
 import pg from "pg";
 import type { DatabaseInterface } from "../types/types";
 import { STORE } from "../store/store";
