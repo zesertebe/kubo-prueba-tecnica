@@ -2,10 +2,11 @@
   "compilerOptions": {
     "experimentalDecorators": true,
     "target": "ESNext",
-    "module": "ESNext",
+    "outDir": "./dist",
+    "module": "CommonJS",
     "strict": true,
-    "moduleResolution": "Bundler",
-    "verbatimModuleSyntax": true,
+    "moduleResolution": "node",
+    "verbatimModuleSyntax": false,
     "skipLibCheck": true,
     "types": ["node"],
     "jsx": "react-jsx",
@@ -15,4 +16,3 @@
     }
   }
 }
-
