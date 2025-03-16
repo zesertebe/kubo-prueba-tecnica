@@ -4,8 +4,12 @@ import type { UsersRepository } from "@/repositories/users/users.repository";
 export class UsersService implements UsersInterface {
   constructor(private usersRepository: UsersRepository) {}
 
-  async createUser({ email, name }: Omit<UserType, "id">): Promise<UserType> {
-    return await this.usersRepository.createUser({ email, name });
+  async createUser({
+    email,
+    name,
+    isVerified,
+  }: Omit<UserType, "id">): Promise<UserType> {
+    return await this.usersRepository.createUser({ email, name, isVerified });
   }
   async getUserByiId(id: UserType["id"]): Promise<UserType> {
     return await this.usersRepository.getUserByiId(id);

@@ -46,3 +46,5 @@ create TABLE if not exists Core.users_movies(
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 
 );
+GRANT ALL ON SCHEMA core TO "owner";
+

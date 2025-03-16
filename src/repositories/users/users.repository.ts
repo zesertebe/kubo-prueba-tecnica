@@ -1,11 +1,16 @@
 import type { UsersInterface, UserType } from "@/models/users/users.models";
 
 export class UsersRepository implements UsersInterface {
-  async createUser({ email, name }: Omit<UserType, "id">): Promise<UserType> {
+  async createUser({
+    email,
+    name,
+    isVerified,
+  }: Omit<UserType, "id">): Promise<UserType> {
     const user: UserType = {
       email,
       name,
       id: 1,
+      isVerified,
     };
     return user;
   }
@@ -15,6 +20,7 @@ export class UsersRepository implements UsersInterface {
       email: "pepito@gmail.com",
       name: "pepito perez",
       id,
+      isVerified: true,
     };
     return user;
   }
@@ -23,6 +29,7 @@ export class UsersRepository implements UsersInterface {
       email: "pepito@gmail.com",
       name: "pepito perez",
       id: 1,
+      isVerified: true,
     };
     return [user];
   }

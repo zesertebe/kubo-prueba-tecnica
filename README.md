@@ -17,7 +17,9 @@ npm install
 3. Crear el archivo de variables de entorno (.env) en la raiz del proyecto con la siguiente estructura:
 
 ```env
-
+  BASE: la versión base de la api ej: v1,
+  APP_PORT: el puerto de la api ej: 3000,
+  DB: Enum de la base de datos 0 = POSTGRESQL ej: 0,
 ```
 
 > [!WARNING]\
