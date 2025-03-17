@@ -24,11 +24,12 @@ export class PoolPG implements DatabaseInterface {
         connectionTimeoutMillis: 2000,
       };
     } else {
+      console.log("heroku");
       // estamos en heroku
       objPool = {
         connectionString: STORE.PG.HOST,
         ssl: {
-          rejectUnauthorized: true,
+          rejectUnauthorized: false,
         },
       };
     }
