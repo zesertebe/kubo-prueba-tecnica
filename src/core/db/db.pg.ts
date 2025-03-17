@@ -27,7 +27,7 @@ export class PoolPG implements DatabaseInterface {
       objPool = {
         connectionString: STORE.PG.HOST,
         ssl: {
-          rejectUnauthorized: false,
+          rejectUnauthorized: true,
         },
       };
     }
