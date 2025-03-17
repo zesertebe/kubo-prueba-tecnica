@@ -59,6 +59,7 @@ export class CategoriesController {
         content: response,
       });
     } catch (e) {
+      console.log("categories > getCategoryById: ", e);
       return ApiError.handle(context, e);
     }
   }
