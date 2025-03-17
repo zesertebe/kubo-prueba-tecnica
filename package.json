@@ -1,6 +1,11 @@
 {
   "name": "kubo-prueba-tecnica",
   "main": "src/index.ts",
+  "author": {
+    "name": "Arturo Gomez",
+    "email": "zesertebe@gmail.com",
+    "url": "https://adev.dev"
+  },
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "build": "tsc && tsc-alias",

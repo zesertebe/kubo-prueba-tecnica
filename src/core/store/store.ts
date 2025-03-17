@@ -10,6 +10,6 @@ export const STORE = {
     PASSWORD: process.env.PG_PASSWORD || "",
     PORT: process.env.PG_PORT || "5432",
     HOST: process.env.PG_HOST || process.env.DATABASE_URL || "localhost",
-    NAME: process.env.PG_DB || "kudo",
+    NAME: process.env.PG_DB || "kubo",
   },
 };
