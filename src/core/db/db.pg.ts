@@ -12,6 +12,7 @@ export class PoolPG implements DatabaseInterface {
     let objPool = {};
     if (STORE.ENV == 0) {
       // estamos en local
+      console.log("local");
       objPool = {
         user: STORE.PG.USER,
         password: STORE.PG.PASSWORD,
